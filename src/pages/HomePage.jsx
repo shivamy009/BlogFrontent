@@ -35,7 +35,7 @@ const HomePage = () => {
      })
   }
   const fetchTrandingBlog=()=>{
-     axios.get(import.meta.env.VITE_SERVER_DOMAIN +'tranding-blogs')
+     axios.get(import.meta.env.VITE_SERVER_DOMAIN +'/tranding-blogs')
 
      .then(({data})=>{
       // console.log(data)
