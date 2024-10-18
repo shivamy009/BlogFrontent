@@ -4,7 +4,11 @@ import { Link } from 'react-router-dom';
 
 const BlogPostCard = ({content,author}) => {
     let {publishedAt,tags,title,des,banner,activity:{total_likes},blog_id:id}=content;
-    let {fullname,username,profile_img}=author
+    // let {fullname,username,profile_img}=author
+      let fullname, username, profile_img;
+    if (author) {
+      ({ fullname, username, profile_img } = author);
+    }
   return (
     <Link to={`/blog/${id}`} className=' flex gap-8 items-center border-b border-grey pb-5 mb-4' > 
    <div className=' w-full'>
