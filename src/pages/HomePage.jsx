@@ -37,7 +37,7 @@ const HomePage = () => {
   const fetchTrandingBlog=()=>{
      axios.get(import.meta.env.VITE_SERVER_DOMAIN +'/tranding-blogs')
 
-     .then(({data})=>{
+     .then(async({data})=>{
       // console.log(data)
       setTrandingblog(data.blog)
      })
@@ -103,10 +103,10 @@ const HomePage = () => {
        {
         blogs==null ?(<Loader/>):
         (
-          blogs.results.length ?
-       blogs.results.map((blog,i)=>{
+          blogs?.results?.length ?
+       blogs?.results?.map((blog,i)=>{
         return <Page_Animation key={i} transition={{duration:1,delay:i*.1}}>
-            <BlogPostCard content={blog} author={blog.author.personal_info}/>
+            <BlogPostCard content={blog} author={blog?.author?.personal_info}/>
         </Page_Animation>
        })
        :<NodataMessage Message={"No blogs Published"}/>
@@ -119,7 +119,7 @@ const HomePage = () => {
       trandingblogs==null ?(<Loader/>):
       (
         trandingblogs.length ?
-     trandingblogs.map((blog,i)=>{
+     trandingblogs?.map((blog,i)=>{
       return <Page_Animation key={i} transition={{duration:1,delay:i*.1}}>
            <MiniMalBlogPost_compo blog={blog} index={i}/>
       </Page_Animation>
@@ -141,7 +141,7 @@ const HomePage = () => {
                 <h1>Stories from all interests</h1>
                 <div className=' flex gap-3 flex-wrap'>
                   {
-categories.map((category,i)=>{
+categories?.map((category,i)=>{
   return <button key={i} className={'tag text-purple ' + (pagestate==category ? 'bg-black text-white ':' ' )} onClick={loadBycategory}>
     {category}
   </button>
@@ -160,7 +160,7 @@ categories.map((category,i)=>{
       trandingblogs==null ?(<Loader/>):
       (
         trandingblogs.length ?
-     trandingblogs.map((blog,i)=>{
+     trandingblogs?.map((blog,i)=>{
       return <Page_Animation key={i} transition={{duration:1,delay:i*.1}}>
            <MiniMalBlogPost_compo blog={blog} index={i}/>
       </Page_Animation>
