@@ -104,7 +104,7 @@ const BlogPage = () => {
                 <BlogInteraction/>
                <div className=' my-12 font-gelasio blog-page-content'>
                     {
-                        content[0].blocks.map((block,i)=>{
+                        content[0]?.blocks?.map((block,i)=>{
                             return <div key={i} className=' my-4 md:my-8'>
                                <BlogContent block={block}/>
                             </div>
@@ -118,7 +118,7 @@ const BlogPage = () => {
                     <>
                     <h1 className=' mt-14 text-2xl mb-10 font-medium'>Similar Blog</h1>
                     {
-                        similarblog.map((blog,i)=>{
+                        similarblog?.map((blog,i)=>{
                             let {author:{personal_info}}=blog;
                             return <Page_Animation key={i} transition={{duration:1,delay:i*0.08}}>
                                 <BlogPostCard content={blog} author={personal_info}/>
