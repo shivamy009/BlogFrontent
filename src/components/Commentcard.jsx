@@ -7,10 +7,45 @@ import { BlogContext } from '../pages/BlogPage'
 import axios from 'axios'
 
 const Commentcard = ({index,leftVal,commentData}) => {
-    let {userAuth:{access_token,username}}=useContext(UserContext)
-    const [isReply,setReply]=useState(false)
-    let {commented_by:{personal_info:{profile_img,fullname,username:commented_by_username}},commentedAt,comment,_id,children}=commentData
-    let {blogs,blogs:{comments,activity,activity:{total_parent_comments},comments:{results:commentsArr},author:{personal_info:{username:blog_author}}},setBlogs,setTotalparentCommentLoaded}=useContext(BlogContext)
+  // let {userAuth:{access_token,username}}=useContext(UserContext)
+    // const [isReply,setReply]=useState(false)
+    // let {commented_by:{personal_info:{profile_img,fullname,username:commented_by_username}},commentedAt,comment,_id,children}=commentData
+    // let {blogs,blogs:{comments,activity,activity:{total_parent_comments},comments:{results:commentsArr},author:{personal_info:{username:blog_author}}},setBlogs,setTotalparentCommentLoaded}=useContext(BlogContext)
+    let { userAuth: { access_token, username } } = useContext(UserContext);
+
+const [isReply, setReply] = useState(false);
+
+// Check if commentData exists and commented_by is not null or undefined
+let profile_img = "";
+let fullname = "";
+let commented_by_username = "";
+let commentedAt = "";
+let comment = "";
+let _id = "";
+let children = [];
+
+if (commentData && commentData.commented_by && commentData.commented_by.personal_info) {
+  profile_img = commentData.commented_by.personal_info.profile_img || "";
+  fullname = commentData.commented_by.personal_info.fullname || "";
+  commented_by_username = commentData.commented_by.personal_info.username || "";
+  commentedAt = commentData.commentedAt || "";
+  comment = commentData.comment || "";
+  _id = commentData._id || "";
+  children = commentData.children || [];
+}
+
+let {
+  blogs,
+  blogs: {
+    comments,
+    activity = {},
+    activity: { total_parent_comments = 0 } = {},
+    comments: { results: commentsArr = [] } = {},
+    author: { personal_info: { username: blog_author = "" } = {} } = {},
+  } = {},
+  setBlogs,
+  setTotalparentCommentLoaded,
+} = useContext(BlogContext);
 
     const getParentIndex=()=>{
         let startingPoint=index-1;
